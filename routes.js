@@ -7,6 +7,12 @@ router.route('/').get((req, res) => {
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/:id').get((req, res) => {
+  console.log('just id' + req.params.id);
+  Review.findById(req.params.id)
+    .then((review) => res.json(review))
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
 
 router.route('/:country').get((req, res) => {
 
@@ -20,13 +26,6 @@ router.route('/:country').get((req, res) => {
         .catch((err) => res.status(400).json('Error: ' + err));
 
   });
-
-router.route('/:id').get((req, res) => {
-  console.log('just id' + req.params.id);
-  Review.findById(req.params.id)
-    .then((review) => res.json(review))
-    .catch((err) => res.status(400).json('Error: ' + err));
-});
 
 
 router.route('/add').post(async (req, res) => {
